@@ -1,0 +1,7 @@
+POST http://localhost:3001/api/user/newUser
+Content-Type: application/json
+
+{
+    "username": "wdasdwdwwdasdw",
+    "passwordHash": "sdk222"
+}
