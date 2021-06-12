@@ -2,6 +2,7 @@ POST http://localhost:3001/api/user/newUser
 Content-Type: application/json
 
 {
-    "username": "wdasdwdwwdasdw",
-    "passwordHash": "sdk222"
+    "username": "testuser",
+    "password": "password",
+    "recipes":["https://edamam.co.uk/stuff", "https://edamam.com/things"]
 }
