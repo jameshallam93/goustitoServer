@@ -18,7 +18,7 @@ try {
 
 app.use(express.json());
 app.use(cors());
-
+app.use("/", express.static("build"));
 app.use("/api/ping", pingRouter);
 app.use("/api/user", userRouter);
 app.use("/api/login", loginRouter);

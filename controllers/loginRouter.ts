@@ -7,17 +7,19 @@ const compareWithHash = async (password: string, hash: string) => {
 	return await bcrypt.compare(password, hash);
 };
 
-loginRouter.post("/login", async (request, response) => {
+loginRouter.post("/", async (request, response) => {
 	const credentials = request.body;
 	const userProfile = await User.findOne({ username: credentials.username });
 
 	if (!userProfile) {
-		return response.json({ error: "user not found" }).status(401);
+		response.status(400).json({ error: "user not found" });
+		return;
 	}
 	const passwordIsValid = await compareWithHash(credentials.password, userProfile.passwordHash);
 
 	if (!passwordIsValid) {
-		return response.json({ error: "incorrect password" }).status(401);
+		response.json({ error: "incorrect password" }).status(401);
+		return;
 	}
 	response.send({ username: userProfile.username }).status(200);
 
