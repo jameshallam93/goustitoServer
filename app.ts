@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import * as config from "./utils/config";
 import pingRouter from "./controllers/pingRouter";
-import userRouter from "./controllers/userRouter";
+import { userRouter } from "./controllers/userRouter";
+import { loginRouter } from "./controllers/loginRouter";
 
 const app = express();
 
@@ -20,5 +21,6 @@ app.use(cors());
 
 app.use("/api/ping", pingRouter);
 app.use("/api/user", userRouter);
+app.use("/api/login", loginRouter);
 
 export = app;

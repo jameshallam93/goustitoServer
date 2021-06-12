@@ -13,6 +13,10 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    recipes: {
+        type: Array,
+        required: false
+    },
     id: {
         type: mongoose.Schema.Types.ObjectId
     }
