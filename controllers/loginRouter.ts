@@ -2,9 +2,14 @@ import express from "express";
 const loginRouter = express.Router();
 import bcrypt from "bcrypt";
 import User from "../models/user";
+import jwt from "jsonwebtoken";
 
 const compareWithHash = async (password: string, hash: string) => {
 	return await bcrypt.compare(password, hash);
+};
+
+const generateToken = (username: string): string => {
+	return jwt.sign({ username: username }, process.env.TOKEN_SECRET!, { expiresIn: 1800 });//eslint-disable-line
 };
 
 loginRouter.post("/", async (request, response) => {
@@ -21,7 +26,12 @@ loginRouter.post("/", async (request, response) => {
 		response.status(400).send({ error: "Incorrect password" });
 		return;
 	}
-	response.send({ username: userProfile.username }).status(200);
+	const token = generateToken(credentials.username);
+	response.send({
+		username: userProfile.username,
+		recipes: userProfile.recipes,
+		token
+	}).status(200);
 
 });
 
