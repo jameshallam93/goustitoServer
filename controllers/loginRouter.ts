@@ -12,13 +12,13 @@ loginRouter.post("/", async (request, response) => {
 	const userProfile = await User.findOne({ username: credentials.username });
 
 	if (!userProfile) {
-		response.status(400).json({ error: "user not found" });
+		response.status(400).json({ error: "User not found" });
 		return;
 	}
 	const passwordIsValid = await compareWithHash(credentials.password, userProfile.passwordHash);
 
 	if (!passwordIsValid) {
-		response.json({ error: "incorrect password" }).status(401);
+		response.status(400).send({ error: "Incorrect password" });
 		return;
 	}
 	response.send({ username: userProfile.username }).status(200);
