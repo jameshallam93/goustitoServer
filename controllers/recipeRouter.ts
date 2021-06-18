@@ -4,9 +4,28 @@ import jwt from "jsonwebtoken";
 
 const recipeRouter = express.Router();
 
+recipeRouter.get("/userRecipes/:user", async (request, response) => {
+	const currentUser = request.params.user;
+	const token: string | undefined = request.headers.authorization?.slice(7);
+	if (!token) {
+		response.status(401).json({ error: "no token" });
+		return;
+	}
+	const decodedToken: any = jwt.verify(token, process.env.TOKEN_SECRET!);
+	const username = decodedToken.username;
+	if (username !== currentUser) {
+		response.status(403).json({ error: "token does not match user session" });
+		return;
+	}
+	const userDetails = await User.findOne({ username: currentUser });
+	const recipes = userDetails.recipes;
+	response.status(200).json(recipes);
+
+});
+
 recipeRouter.post("/saveById", async (request, response) => {
 
-	const { recipeId, currentUser } = request.body;
+	const { recipe, currentUser } = request.body;
 
 	const token: string | undefined = request.headers.authorization?.slice(7);
 	if (!token) {
@@ -24,11 +43,11 @@ recipeRouter.post("/saveById", async (request, response) => {
 	if (userDetails) {
 		userDetails.recipes = [
 			...userDetails.recipes,
-			recipeId
+			recipe
 		];
 		await userDetails.save();
 
-		response.status(200).send(recipeId);
+		response.status(200).send(recipe);
 	}
 
 });
