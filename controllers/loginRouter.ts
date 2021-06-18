@@ -27,10 +27,13 @@ loginRouter.post("/", async (request, response) => {
 		return;
 	}
 	const token = generateToken(credentials.username);
+	const currentTime = Math.round(new Date().getTime() / 1000);
+	const expiry = (currentTime + 3600) * 1000;
 	response.send({
 		username: userProfile.username,
 		recipes: userProfile.recipes,
-		token
+		token,
+		expiry
 	}).status(200);
 
 });
