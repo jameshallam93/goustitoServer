@@ -1,4 +1,4 @@
-import bcrpyt from "bcrypt";
+const bcrpyt = require("bcrypt");
 
 const saltRounds = 10;
 

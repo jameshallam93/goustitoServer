@@ -1,4 +1,4 @@
-import "dotenv/config";
+require("dotenv").config();
 
 export const PORT = process.env.PORT;
 export const URI = process.env.MONGO_DB_URI;

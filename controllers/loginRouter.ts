@@ -1,20 +1,21 @@
-import express from "express";
-const loginRouter = express.Router();
-import bcrypt from "bcrypt";
-import User from "../models/user";
-import jwt from "jsonwebtoken";
+const express = require("express");
+const loginRouter = require("express").Router();
+const bcrypt = require("bcrypt");
+const User1 = require("../models/user");
+const jwt1 = require("jsonwebtoken");
+
 
 const compareWithHash = async (password: string, hash: string) => {
 	return await bcrypt.compare(password, hash);
 };
 
 const generateToken = (username: string): string => {
-	return jwt.sign({ username: username }, process.env.TOKEN_SECRET!, { expiresIn: 1800 });//eslint-disable-line
+	return jwt1.sign({ username: username }, process.env.TOKEN_SECRET!, { expiresIn: 1800 });//eslint-disable-line
 };
 
-loginRouter.post("/", async (request, response) => {
+loginRouter.post("/", async (request: any, response: any) => {
 	const credentials = request.body;
-	const userProfile = await User.findOne({ username: credentials.username });
+	const userProfile = await User1.findOne({ username: credentials.username });
 
 	if (!userProfile) {
 		response.status(400).json({ error: "User not found" });
@@ -35,4 +36,4 @@ loginRouter.post("/", async (request, response) => {
 
 });
 
-export { loginRouter };
+module.exports = loginRouter;

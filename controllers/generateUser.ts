@@ -1,6 +1,5 @@
-import { Mongoose } from "mongoose";
-import User from "../models/user";
-import { generateHash } from "../utils/auth/generatePasswordHash";
+const User = require("../models/user");
+const generateHash = require("../utils/auth/generatePasswordHash");
 
 export type UserDetails = {
 	username: string,

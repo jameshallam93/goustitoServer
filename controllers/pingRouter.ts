@@ -1,8 +1,7 @@
-import express from "express";
-const pingRouter = express.Router();
+const pingRouter = require("express").Router()
 
-pingRouter.get("/", (request, response) => {
+pingRouter.get("/", (request: Express.Request, response: any) => {
     response.send("pong");
 });
 
-export =  pingRouter;
+module.exports = pingRouter;

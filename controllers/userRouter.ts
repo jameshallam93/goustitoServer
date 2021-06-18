@@ -1,9 +1,7 @@
-import express from "express";
-import { generateUser } from "./generateUser";
+const userRouter = require("express").Router();
+const generateUser = require("./generateUser");
 
-const userRouter = express.Router();
-
-userRouter.post("/signup", async (request, response) => {
+userRouter.post("/signup", async (request: any, response: any) => {
 	const userDetails = request.body;
 	try {
 		const newUser = await generateUser(userDetails);
@@ -18,4 +16,4 @@ userRouter.post("/signup", async (request, response) => {
 
 });
 
-export { userRouter };
+module.exports = userRouter;
