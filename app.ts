@@ -10,13 +10,17 @@ const recipeRouter = require("./controllers/recipeRouter");
 
 const app = express();
 
-try {
-	mongoose.connect(config.URI!, config.mongooseConfig, () => {
-		console.log("successfully connected to mongoose");
-	});
-} catch (e) {
-	console.log(e.message);
-};
+const createConnection = async () => {
+	try {
+		await mongoose.connect(config.URI!, config.mongooseConfig, () => {
+			console.log("successfully connected to ", config.URI!);
+		});
+	} catch (e) {
+		console.log(e.message);
+	};
+}
+
+createConnection();
 
 app.use(express.json());
 app.use(cors());
