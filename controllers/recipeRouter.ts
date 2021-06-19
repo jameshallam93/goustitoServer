@@ -1,3 +1,5 @@
+import { generateApiRequest } from "./generateApiRequest/generateApiRequest";
+
 const recipeRouter = require("express").Router();
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
@@ -24,10 +26,9 @@ recipeRouter.get("/userRecipes/:user", async (request: any, response: any) => {
 
 recipeRouter.post("/search", async (request: any, response: any) => {
 	try {
-		const apiRequest = request.body.apiRequest;
-		console.log(apiRequest);
+		const { searchTerms, mealTypes } = request.body;
+		const apiRequest = generateApiRequest(searchTerms, mealTypes);
 		const apiResponse = await axios.get(apiRequest);
-		console.log(apiResponse.data);
 		response.status(200).send(apiResponse.data);
 	} catch (e) {
 		console.log(e);
