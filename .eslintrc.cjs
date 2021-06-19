@@ -16,6 +16,7 @@ module.exports = {//eslint-disable-line
 		"@typescript-eslint"
 	],
 	"rules": {
+		"@typescript-elint/no-var-requires": false,
 		"indent": [
 			"error",
 			"tab"

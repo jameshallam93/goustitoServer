@@ -1,11 +1,12 @@
-import express from "express";
-import mongoose from "mongoose";
-import cors from "cors";
-import * as config from "./utils/config";
-import pingRouter from "./controllers/pingRouter";
-import { userRouter } from "./controllers/userRouter";
-import { loginRouter } from "./controllers/loginRouter";
-import { recipeRouter } from "./controllers/recipeRouter";
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const config = require("./utils/config");
+const pingRouter = require("./controllers/pingRouter");
+const userRouter = require("./controllers/userRouter");
+const loginRouter = require("./controllers/loginRouter");
+const recipeRouter = require("./controllers/recipeRouter");
+
 
 const app = express();
 
