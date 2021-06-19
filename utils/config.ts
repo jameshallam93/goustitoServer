@@ -6,7 +6,9 @@ export const mongooseConfig = {
     useCreateIndex: true,
     useFindAndModify: false,
     useUnifiedTopology: true,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    heartbeatFrequencyMS: 2000,
+    bufferCommands: false
 };
 export const TOKEN_SECRET = process.env.GOUSTITO_SERVER_TOKEN_SECRET;
 
