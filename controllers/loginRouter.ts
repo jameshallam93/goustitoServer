@@ -11,7 +11,7 @@ const compareWithHash = async (password: string, hash: string) => {
 };
 
 const generateToken = (username: string): string => {
-	return jwt.sign({ username: username }, process.env.TOKEN_SECRET!, { expiresIn: 1800 });//eslint-disable-line
+	return jwt.sign({ username: username }, process.env.GOUSTITO_SERVER_TOKEN_SECRET!, { expiresIn: 1800 });//eslint-disable-line
 };
 
 loginRouter.post("/", async (request: any, response: any) => {
