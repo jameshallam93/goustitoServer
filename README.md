@@ -1,12 +1,18 @@
 # goustitoServer
 
+The backend for the [Goustito recipe bank](https://github.com/jameshallam93/goustito)
+
 ## Requirements:
 
-This server uses MongoDB Atlas. Set up a cluster and a database, and save the database URI as environment variable `MONGO_DB_URI`.
+* A mongo db cluster with the URI saved to environment variable GOUSTITO_SERVER_MONGO_DB_URI
+* GOUSTITO_SERVER_PORT environment variable (currently configured to 3001)
+* GOUSTITO_SERVER_TOKEN_SECRET (any string, currently configured to a random MD5 hash)
+* GOUSTITO_SERVER_FRONTEND_API_ID (sign up for the recipe API at [EDAMAM](https://developer.edamam.com/)
+* GOUSTITO_SERVER_FRONTEND_EDAMAM_API_KEY (as above)
 
-It also uses environment variable `PORT` which is currently configured to 3001.
 
 ## Usage:
+* Follow instructions to clone and start the frontend [here](https://github.com/jameshallam93/goustito/blob/main/README.md)
 * Clone repository
 * `npm install`
 * `npm run dev` for development mode
@@ -14,15 +20,16 @@ It also uses environment variable `PORT` which is currently configured to 3001.
 
 ## Overview:
 
-This is a backend server designed to handle logins/signups and recipe saving from Goustito.
+This is a backend server designed to handle logins/signups, sending requests to the recipe API, and recipe saving.
 
-I intend to use Bcrypt for password hashing.
+Password hashing is done using bcrypt
 
-I will use three routers:
+I will use three express routers:
 
 * User router for signups
 * Login router for logging in
 * Recipe router for recipe saving.
 
-Users will need to have a "Saved Posts" field as well as username and password hash.
+
+
 
