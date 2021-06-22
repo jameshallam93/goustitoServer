@@ -4,6 +4,8 @@ const bcrypt = require("bcrypt");
 
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
+const config = require("../utils/config");
+
 export { };
 
 const compareWithHash = async (password: string, hash: string) => {
@@ -11,7 +13,7 @@ const compareWithHash = async (password: string, hash: string) => {
 };
 
 const generateToken = (username: string): string => {
-	return jwt.sign({ username: username }, process.env.GOUSTITO_SERVER_TOKEN_SECRET!, { expiresIn: 1800 });//eslint-disable-line
+	return jwt.sign({ username: username }, config.GOUSTITO_SERVER_TOKEN_SECRET!, { expiresIn: 1800 });//eslint-disable-line
 };
 
 loginRouter.post("/", async (request: any, response: any) => {
