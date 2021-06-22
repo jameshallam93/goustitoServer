@@ -1,9 +1,12 @@
-import "@testing-library/jest-dom/extend-expect";
+require("@testing-library/jest-dom/extend-expect");
 
-import { generateApiRequest } from "./generateApiRequest";
+const generateApiRequest = require("./generateApiRequest");
+
+const KEY = process.env.REACT_APP_GOUSTITO_FRONTEND_EDAMAM_API_KEY;
+const ID = process.env.REACT_APP_GOUSTITO_FRONTEND_API_ID;
 
 const emptySearchTerm = "";
-const emptyMealType: Array<string> = [];
+let emptyMealType = [];
 
 const searchTerm = "chicken";
 const mealType = ["Lunch"];
@@ -15,14 +18,14 @@ describe("when provided with only a single search term", () => {
 
 	test("returns expected request string", () => {
 		const requestString = generateApiRequest(searchTerm, emptyMealType);
-		expect(requestString).toEqual(`https://api.edamam.com/search?q=${searchTerm}&app_id=${process.env.REACT_APP_API_ID}&app_key=${process.env.REACT_APP_EDAMAM_API_KEY}&from=0&to=99`);
+		expect(requestString).toEqual(`https://api.edamam.com/search?q=${searchTerm}&app_id=${ID}&app_key=${KEY}&from=0&to=99`);
 	});
 });
 
 describe("when provided with a single search term and single mealType", () => {
 	test("returns expected request string", () => {
 		const requestString = generateApiRequest(searchTerm, mealType);
-		expect(requestString).toEqual(`https://api.edamam.com/search?q=${searchTerm}&app_id=${process.env.REACT_APP_API_ID}&app_key=${process.env.REACT_APP_EDAMAM_API_KEY}&from=0&to=99&mealType=${mealType[0]}+`);
+		expect(requestString).toEqual(`https://api.edamam.com/search?q=${searchTerm}&app_id=${ID}&app_key=${KEY}&from=0&to=99&mealType=${mealType[0]}+`);
 	});
 });
 
@@ -30,14 +33,14 @@ describe("when provided with two searchTerms and no mealType", () => {
 	test("returns expected request string", () => {
 		const requestString = generateApiRequest(searchTerms, emptyMealType);
 		console.log(requestString);
-		expect(requestString).toEqual(`https://api.edamam.com/search?q=${searchTerms.split(" ").join("%20")}&app_id=${process.env.REACT_APP_API_ID}&app_key=${process.env.REACT_APP_EDAMAM_API_KEY}&from=0&to=99`);
+		expect(requestString).toEqual(`https://api.edamam.com/search?q=${searchTerms.split(" ").join("%20")}&app_id=${ID}&app_key=${KEY}&from=0&to=99`);
 	});
 });
 
 describe("when provided with two searchTerms and two meal types", () => {
 	test("returns expected request string", () => {
 		const requestString = generateApiRequest(searchTerms, mealTypes);
-		expect(requestString).toEqual(`https://api.edamam.com/search?q=${searchTerms.split(" ").join("%20")}&app_id=${process.env.REACT_APP_API_ID}&app_key=${process.env.REACT_APP_EDAMAM_API_KEY}&from=0&to=99&mealType=${mealTypes[0]}+${mealTypes[1]}+`);
+		expect(requestString).toEqual(`https://api.edamam.com/search?q=${searchTerms.split(" ").join("%20")}&app_id=${ID}&app_key=${KEY}&from=0&to=99&mealType=${mealTypes[0]}+${mealTypes[1]}+`);
 	});
 });
 
@@ -46,6 +49,6 @@ describe("when provided with two searchTerms and two meal types", () => {
 describe("when provided with no search terms and no meal types", () => {
 	test("returns expected request string", () => {
 		const requestString = generateApiRequest(emptySearchTerm, emptyMealType);
-		expect(requestString).toEqual(`https://api.edamam.com/search?q=&app_id=${process.env.REACT_APP_API_ID}&app_key=${process.env.REACT_APP_EDAMAM_API_KEY}&from=0&to=99`);
+		expect(requestString).toEqual(`https://api.edamam.com/search?q=&app_id=${ID}&app_key=${KEY}&from=0&to=99`);
 	});
 });

@@ -8,3 +8,4 @@ export const generateHash = async (password: string): Promise<any> => {//eslint-
 	return hash;
 
 };
+module.exports = generateHash;

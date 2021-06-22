@@ -3,7 +3,7 @@ const loginRouter = require("express").Router();
 const bcrypt = require("bcrypt");
 
 const User = require("../models/user");
-const jwt1 = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 export { };
 
 const compareWithHash = async (password: string, hash: string) => {
@@ -11,7 +11,7 @@ const compareWithHash = async (password: string, hash: string) => {
 };
 
 const generateToken = (username: string): string => {
-	return jwt1.sign({ username: username }, process.env.TOKEN_SECRET!, { expiresIn: 1800 });//eslint-disable-line
+	return jwt.sign({ username: username }, process.env.TOKEN_SECRET!, { expiresIn: 1800 });//eslint-disable-line
 };
 
 loginRouter.post("/", async (request: any, response: any) => {
